@@ -18,12 +18,15 @@ If you'd like to install without CocoaPods, clone this repository and copy the f
 * `NSString+MD5.h`
 * `NSString+MD5.m`
 
-Further you have to install the [AFNetworking](https://github.com/AFNetworking/AFNetworking) library.
+Further you have to add two dependent libraries manually to your project:
+
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+* [MACircleProgressIndicator](https://github.com/swissmanu/MACircleProgressIndicator)
 
 ## Usage
 // TODO
 
-## Customization & Demo
+## Customization
 The view is customizable using direct property assignments or the appearance object:
 
 ```objective-c
@@ -32,4 +35,5 @@ MACachedImageView *appearance = [MACachedImageView appearance];
 // TODO
 ```
 
-Clone the repository and you'll have a running demonstration app ready on your machine: Open `MACachedImageView.xcodeproj` with Xcode and run the App in the iPhone or iPad simulator.
+## Demonstration App
+Clone this repository and run `pod install` on the command line to fetch all dependencies. Open the resulting workspace file. `Run` the the regarding build schema to start the demo app in the iPhone or iPad simulator.
