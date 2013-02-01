@@ -5,11 +5,20 @@
 ![Screenshot](https://raw.github.com/swissmanu/MACachedImageView/master/screenshot.png)
 
 ## Installation
+### CocoaPods
 The easiest way to install `MACachedImageView` is using [CocoaPods](http://cocoapods.org/). Add the following dependency to your `Podfile` and run the `pod install` command via command line:
 
 	pod 'MACachedImageView', '~> 1.0.0'
 
-If you'd like to install without CocoaPods, clone this repository and extract `MACachedImageView.h` and `MACachedImageView.m` from the `MACachedImageView/` subfolder and copy them into your project.
+### Manual
+If you'd like to install without CocoaPods, clone this repository and copy the following files from the `MACachedImageView/` subfolder into your project:
+
+* `MACachedImageView.h`
+* `MACachedImageView.m`
+* `NSString+MD5.h`
+* `NSString+MD5.m`
+
+Further you have to install the [AFNetworking](https://github.com/AFNetworking/AFNetworking) library.
 
 ## Usage
 // TODO
