@@ -88,7 +88,7 @@
 -(void)loadCachedImageFromURL:(NSURL*)url {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [paths objectAtIndex:0];
-    cachePath = [cachePath stringByAppendingPathComponent:@"tixcachedimageview"];
+    cachePath = [cachePath stringByAppendingPathComponent:@"macachedimageview"];
     BOOL isDir = NO;
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];

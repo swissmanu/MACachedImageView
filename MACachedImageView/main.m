@@ -1,10 +1,3 @@
-//
-//  main.m
-//  MACachedImageView
-//
-//  Created by Manuel Alabor on 01.02.13.
-//  Copyright (c) 2013 Manuel Alabor. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 
