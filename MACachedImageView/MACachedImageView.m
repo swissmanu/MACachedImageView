@@ -85,7 +85,11 @@
 
 #pragma mark - Image Display
 
--(void)loadCachedImageFromURL:(NSURL*)url {
+-(void)loadImageFromURL:(NSURL*) url {
+    [self loadImageFromURL:url forceRefreshingCache:NO];
+}
+
+-(void)loadImageFromURL:(NSURL*) url forceRefreshingCache:(BOOL)force {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [paths objectAtIndex:0];
     cachePath = [cachePath stringByAppendingPathComponent:@"macachedimageview"];
@@ -100,7 +104,7 @@
     NSString *filename = [[url absoluteString] md5];
     NSString *filePath = [cachePath stringByAppendingPathComponent:filename];
     
-    if(![fileManager fileExistsAtPath:filePath]) {
+    if(force || ![fileManager fileExistsAtPath:filePath]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             _progressIndicator.value = 0;
             _imageView.hidden = YES;

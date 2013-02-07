@@ -8,5 +8,6 @@
 @property (strong, nonatomic) IBOutlet MACachedImageView *cachedImageView;
 
 - (IBAction)onLoad:(id)sender;
+- (IBAction)onLoadForced:(id)sender;
 
 @end

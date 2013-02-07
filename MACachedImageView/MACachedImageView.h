@@ -10,5 +10,6 @@
 @property (nonatomic) CGFloat progressIndicatorStrokeWidhtRatio UI_APPEARANCE_SELECTOR;
 
 
--(void)loadCachedImageFromURL:(NSURL*)url;
+-(void)loadImageFromURL:(NSURL*) url;
+-(void)loadImageFromURL:(NSURL*) url forceRefreshingCache:(BOOL)force;
 @end
