@@ -24,7 +24,16 @@ Further you have to add two dependent libraries manually to your project:
 * [MACircleProgressIndicator](https://github.com/swissmanu/MACircleProgressIndicator)
 
 ## Usage
-// TODO
+```objective-c
+MACachedImageView *cachedImageView = [MACachedImageView alloc] initWithFrame:CGRectMake(0,0,100,100)];
+NSURL *url = [NSURL URLWithString:@"http://my.fancy.images.com/image.jpg"];
+
+// Show an image by using the cache, if already available:
+[self.cachedImageView loadImageFromURL:url];
+
+// Show an image and force to refresh the cache:
+[self.cachedImageView loadImageFromURL:url forceRefreshingCache:YES];
+```
 
 ## Customization
 The view is customizable using direct property assignments or the appearance object:
@@ -32,7 +41,26 @@ The view is customizable using direct property assignments or the appearance obj
 ```objective-c
 MACachedImageView *appearance = [MACachedImageView appearance];
 
-// TODO
+// Showing an image if no image is loaded yet or during loading an image:
+appearance.placeholderImage = [UIImage imageNamed:@"..."];
+
+// Use the placeholderImageContentMode property to decide how the placeholder
+// image should be placed when shown.
+appearance.placeholderImageContentMode = UIViewContentModeCenter;
+
+// When displaying a loaded image, this content mode is used to show it properly.
+appearance.imageContentMode = UIViewContentModeScaleAspectFill;
+
+// The color of the download progress indicator.
+appearance.progressIndicatorColor = [UIColor whiteColor];
+
+// Set the stroke width of the MACircleProgressIndicator explicitly.
+// progressIndicatorStrokeWidthRatio will be ignored.
+//appearance.progressIndicatorStrokeWidth = 1.0;
+
+// Set a ratio between the MACircleProgressIndicators size and the stroke width.
+// progressIndicatorStrokeWidth will be ignored.
+//appearance.progressIndicatorStrokeWidthRatio = 0.15; // default ratio, just for information :)
 ```
 
 ## Demonstration App
