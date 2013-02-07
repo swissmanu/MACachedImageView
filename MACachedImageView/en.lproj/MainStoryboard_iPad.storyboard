@@ -1,23 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="4">
             <objects>
                 <viewController id="2" customClass="MAViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLh-mk-Y1B" customClass="MACachedImageView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http://images2.fanpop.com/images/photos/7200000/Candy-candy-7296348-2274-1647.jpg" borderStyle="roundedRect" placeholder="Image URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wGu-q3-8dv">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcU-Uw-dsU">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="398" id="raJ-aF-ECQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="Load (Cached)">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLoad:" destination="2" eventType="touchUpInside" id="7fd-GN-V9C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-rV-wao">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="Load (Force Refresh)">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLoadForced:" destination="2" eventType="touchUpInside" id="bTi-nT-UkF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Show Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-5M-pcN">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="80j-f9-Tcg"/>
+                                    <constraint firstAttribute="width" constant="138" id="Pos-Np-lCB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-oV-joJ">
+                                <connections>
+                                    <action selector="onTogglePlaceholder:" destination="2" eventType="valueChanged" id="eH4-iW-62O"/>
+                                </connections>
+                            </switch>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="Q3o-4j-gSD"/>
+                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="top" secondItem="EBf-rV-wao" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="QeN-Sr-agx"/>
+                            <constraint firstItem="jY3-5M-pcN" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="RhX-aq-t4b"/>
+                            <constraint firstItem="wGu-q3-8dv" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="TzR-8w-bh0"/>
+                            <constraint firstItem="wGu-q3-8dv" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" type="default" id="UY5-XI-9S5"/>
+                            <constraint firstItem="VdK-oV-joJ" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="237" id="Uhb-uU-kO5"/>
+                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="leading" secondItem="5" secondAttribute="leading" type="default" id="W1m-3Q-Sef"/>
+                            <constraint firstAttribute="trailing" secondItem="WcU-Uw-dsU" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YbT-pj-Xpr"/>
+                            <constraint firstItem="VdK-oV-joJ" firstAttribute="centerY" secondItem="WcU-Uw-dsU" secondAttribute="centerY" type="default" id="Ze6-PS-jHP"/>
+                            <constraint firstItem="EBf-rV-wao" firstAttribute="top" secondItem="WcU-Uw-dsU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="cjD-2h-7fM"/>
+                            <constraint firstAttribute="trailing" secondItem="EBf-rV-wao" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hcY-Dq-kgE"/>
+                            <constraint firstItem="WcU-Uw-dsU" firstAttribute="leading" secondItem="EBf-rV-wao" secondAttribute="leading" type="default" id="hhl-Ub-ZGW"/>
+                            <constraint firstAttribute="trailing" secondItem="wGu-q3-8dv" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="j0K-Jv-ayE"/>
+                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="trailing" secondItem="5" secondAttribute="trailing" type="default" id="q33-Gd-vfs"/>
+                            <constraint firstItem="WcU-Uw-dsU" firstAttribute="top" secondItem="wGu-q3-8dv" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sGr-Uv-13S"/>
+                            <constraint firstItem="jY3-5M-pcN" firstAttribute="centerY" secondItem="VdK-oV-joJ" secondAttribute="centerY" type="default" id="uqZ-RT-CLL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cachedImageView" destination="ZLh-mk-Y1B" id="Xaz-VG-QsW"/>
+                        <outlet property="txtURL" destination="wGu-q3-8dv" id="42C-Sa-U2X"/>
+                        <outlet property="view" destination="5" id="J5p-xz-LTF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="MACachedImageView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MACachedImageView.h"/>
+        </class>
+        <class className="MAViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MAViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onLoad:"/>
+                <relationship kind="action" name="onLoadForced:"/>
+                <relationship kind="action" name="onTogglePlaceholder:"/>
+                <relationship kind="outlet" name="cachedImageView" candidateClass="MACachedImageView"/>
+                <relationship kind="outlet" name="txtURL" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

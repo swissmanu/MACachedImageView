@@ -5,24 +5,39 @@
 #define kCachedImageViewDefaultProgressIndicatorSize 35.0
 #define kSubfolderImageCache @"macachedimageview"
 
+
+#pragma mark - Private Interface Extensions
+
 @interface MACachedImageView () {
     UIImageView *_imageView;
     MACircleProgressIndicator *_progressIndicator;
     BOOL _displayingImage;
 }
 
+/** Setup the MACachedImageView */
 -(void)setup;
 
+/** Returns the path to the caching directoy. If the directory does not exist already, it gets created. */
 -(NSString*)cacheDirectoryPath;
+
+/** Checks if a specific file with the given path exists. */
 -(BOOL)fileExists:(NSString*)path;
+
+/** Downloads an image from the given url to the passed destinationPath. If a MACircleProgressIndicator is passed for progressIndicator, this progress indicator gets updated with the progress of the download process. After finishing the download, callback is executed. If an error occoured, the parameter "filePath" of callback will be nil. */
 -(void)downloadImageFromURL:(NSURL*)url
                  toFilePath:(NSString*)destinationPath
           progressIndicator:(MACircleProgressIndicator*)progressIndicator
                    callback:(void(^)(NSString* filePath))callback;
+
+/** Hides the currently displayed image. If a placeholder image was defined, that one gets displayed. */
 -(void)hideImage;
+
+/** Displays the given image using the passed UIViewContentMode. */
 -(void)displayImage:(UIImage*)image withContentMode:(UIViewContentMode)contentMode;
 @end
 
+
+#pragma mark - MACachedView Implementation
 
 @implementation MACachedImageView
 
@@ -30,6 +45,8 @@
 @dynamic progressIndicatorColor;
 @dynamic progressIndicatorStrokeWidth;
 @dynamic progressIndicatorStrokeWidthRatio;
+@synthesize imageContentMode = _imageContentMode;
+@synthesize placeholderContentMode = _placeholderContentMode;
 
 -(id)init {
     self = [super init];
@@ -61,11 +78,13 @@
     
     _progressIndicator.color = [UIColor whiteColor];
     _progressIndicator.hidden = YES;
+    self.backgroundColor = [UIColor darkGrayColor];
+    self.imageContentMode = UIViewContentModeScaleAspectFill;
+    self.placeholderContentMode = UIViewContentModeCenter;
     
     [self addSubview:_imageView];
     [self addSubview:_progressIndicator];
     
-    self.backgroundColor = [UIColor darkGrayColor];
     [self hideImage];
 }
 
@@ -105,6 +124,22 @@
     return _progressIndicator.strokeWidthRatio;
 }
 
+-(void)setImageContentMode:(UIViewContentMode)imageContentMode {
+    _imageContentMode = imageContentMode;
+    
+    if(_displayingImage) {
+        _imageView.contentMode = imageContentMode;
+    }
+}
+
+-(void)setPlaceholderContentMode:(UIViewContentMode)placeholderContentMode {
+    _placeholderContentMode = placeholderContentMode;
+    
+    if(!_displayingImage && _placeholderImage != nil) {
+        _imageView.contentMode = placeholderContentMode;
+    }
+}
+
 
 #pragma mark - Image Display
 
@@ -127,12 +162,12 @@
             
             if(filePath != nil) {
                 UIImage *cachedImage = [UIImage imageWithContentsOfFile:filePath];
-                [self displayImage:cachedImage withContentMode:UIViewContentModeScaleAspectFill];
+                [self displayImage:cachedImage withContentMode:self.imageContentMode];
             }
         }];
     } else {
         UIImage *cachedImage = [UIImage imageWithContentsOfFile:cachedFilePath];
-        [self displayImage:cachedImage withContentMode:UIViewContentModeScaleAspectFill];
+        [self displayImage:cachedImage withContentMode:self.imageContentMode];
     }
 }
 
@@ -182,15 +217,16 @@
 }
 
 -(void)hideImage {
-    _displayingImage = NO;
     if(_placeholderImage) {
-        [self displayImage:_placeholderImage withContentMode:UIViewContentModeCenter];
+        [self displayImage:_placeholderImage withContentMode:self.placeholderContentMode];
     } else {
         _imageView.hidden = YES;
     }
+    _displayingImage = NO;
 }
 
 -(void)displayImage:(UIImage*)image withContentMode:(UIViewContentMode)contentMode {
+    _displayingImage = YES;
     _imageView.contentMode = contentMode;
     _imageView.hidden = NO;
     _imageView.image = image;
