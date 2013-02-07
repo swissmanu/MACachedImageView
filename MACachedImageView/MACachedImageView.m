@@ -3,12 +3,21 @@
 #import "NSString+MD5.h"
 
 #define kCachedImageViewDefaultProgressIndicatorSize 35.0
+#define kSubfolderImageCache @"macachedimageview"
 
 @interface MACachedImageView () {
     UIImageView *_imageView;
     MACircleProgressIndicator *_progressIndicator;
 }
+
 -(void)setup;
+
+-(NSString*)cacheDirectoryPath;
+-(BOOL)fileExists:(NSString*)path;
+-(void)downloadImageFromURL:(NSURL*)url
+                 toFilePath:(NSString*)destinationPath
+          progressIndicator:(MACircleProgressIndicator*)progressIndicator
+                   callback:(void(^)(NSString* filePath))callback;
 @end
 
 
@@ -90,50 +99,66 @@
 }
 
 -(void)loadImageFromURL:(NSURL*) url forceRefreshingCache:(BOOL)force {
+    NSString *cacheDirectory = [self cacheDirectoryPath];
+    NSString *cachedFilename = [[url absoluteString] md5];
+    NSString *cachedFilePath = [cacheDirectory stringByAppendingPathComponent:cachedFilename];
+    
+    if(force || ![self fileExists:cachedFilePath]) {
+        _imageView.hidden = YES;
+        _progressIndicator.value = 0;
+        _progressIndicator.hidden = NO;
+        
+        [self downloadImageFromURL:url toFilePath:cachedFilePath progressIndicator:_progressIndicator callback:^(NSString *filePath) {
+            _imageView.image = [UIImage imageWithContentsOfFile:filePath];
+            _progressIndicator.hidden = YES;
+            _imageView.hidden = NO;
+        }];
+    } else {
+        _imageView.image = [UIImage imageWithContentsOfFile:cachedFilePath];
+        _imageView.hidden = NO;
+    }
+}
+
+-(void)downloadImageFromURL:(NSURL*)url toFilePath:(NSString*)destinationPath progressIndicator:(MACircleProgressIndicator*)progressIndicator callback:(void(^)(NSString* filePath))callback {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url];
+        
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:req];
+        operation.outputStream = [NSOutputStream outputStreamToFileAtPath:destinationPath append:NO];
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            float progress = (float)totalBytesRead / (float)totalBytesExpectedToRead;
+            if(progressIndicator) progressIndicator.value = progress;
+        }];
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if(callback) callback(destinationPath);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if(callback) callback(nil);
+        }];
+        
+        [operation start];
+    });
+}
+
+-(NSString*)cacheDirectoryPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [paths objectAtIndex:0];
-    cachePath = [cachePath stringByAppendingPathComponent:@"macachedimageview"];
-    BOOL isDir = NO;
     NSError *error;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    
+    cachePath = [cachePath stringByAppendingPathComponent:kSubfolderImageCache];
     
     if (![fileManager fileExistsAtPath:cachePath isDirectory:&isDir] && isDir == NO) {
         [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:NO attributes:nil error:&error];
     }
     
-    NSString *filename = [[url absoluteString] md5];
-    NSString *filePath = [cachePath stringByAppendingPathComponent:filename];
-    
-    if(force || ![fileManager fileExistsAtPath:filePath]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _progressIndicator.value = 0;
-            _imageView.hidden = YES;
-            _progressIndicator.hidden = NO;
-            
-            NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url];
-            
-            AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:req];
-            operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
-            [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-                float progress = (float)totalBytesRead / (float)totalBytesExpectedToRead;
-                _progressIndicator.value = progress;
-            }];
-            
-            [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"SUCCCESSFULL IMG RETRIEVE to %@!", filePath);
-                _imageView.image = [UIImage imageWithContentsOfFile:filePath];
-                _progressIndicator.hidden = YES;
-                _imageView.hidden = NO;
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"ERROR");
-            }];
-            
-            [operation start];
-        });
-    } else {
-        _imageView.image = [UIImage imageWithContentsOfFile:filePath];
-        _imageView.hidden = NO;
-    }
+    return cachePath;
+}
+
+-(BOOL)fileExists:(NSString*)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    return [fileManager fileExistsAtPath:path isDirectory:NO];
 }
 
 
