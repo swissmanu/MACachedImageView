@@ -7,6 +7,10 @@
 
 @implementation MAViewController
 
+-(void)viewDidLoad {
+    //self.cachedImageView.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
+}
+
 - (IBAction)onLoad:(id)sender {
     NSString *rawURL = self.txtURL.text;
     if(rawURL.length > 0) {

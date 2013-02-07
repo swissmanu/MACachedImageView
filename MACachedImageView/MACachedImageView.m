@@ -8,6 +8,7 @@
 @interface MACachedImageView () {
     UIImageView *_imageView;
     MACircleProgressIndicator *_progressIndicator;
+    BOOL _displayingImage;
 }
 
 -(void)setup;
@@ -18,14 +19,17 @@
                  toFilePath:(NSString*)destinationPath
           progressIndicator:(MACircleProgressIndicator*)progressIndicator
                    callback:(void(^)(NSString* filePath))callback;
+-(void)hideImage;
+-(void)displayImage:(UIImage*)image withContentMode:(UIViewContentMode)contentMode;
 @end
 
 
 @implementation MACachedImageView
 
+@synthesize placeholderImage = _placeholderImage;
 @dynamic progressIndicatorColor;
 @dynamic progressIndicatorStrokeWidth;
-@dynamic progressIndicatorStrokeWidhtRatio;
+@dynamic progressIndicatorStrokeWidthRatio;
 
 -(id)init {
     self = [super init];
@@ -54,7 +58,7 @@
 -(void)setup {
     _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     _progressIndicator = [[MACircleProgressIndicator alloc] initWithFrame:CGRectZero];
-    _imageView.hidden = YES;
+    
     _progressIndicator.color = [UIColor whiteColor];
     _progressIndicator.hidden = YES;
     
@@ -62,10 +66,20 @@
     [self addSubview:_progressIndicator];
     
     self.backgroundColor = [UIColor darkGrayColor];
+    [self hideImage];
 }
 
 
 #pragma mark - Appearance Properties
+
+-(void)setPlaceholderImage:(UIImage *)placeholderImage {
+    _placeholderImage = placeholderImage;
+    
+    if(!_displayingImage) {
+        // Ensure the new placeholder image is properly displayed.
+        [self hideImage];
+    }
+}
 
 -(void)setProgressIndicatorColor:(UIColor *)progressIndicatorColor {
     _progressIndicator.color = progressIndicatorColor;
@@ -87,39 +101,45 @@
     _progressIndicator.strokeWidthRatio = progressIndicatorStrokeWidhtRatio;
 }
 
--(CGFloat)progressIndicatorStrokeWidhtRatio {
+-(CGFloat)progressIndicatorStrokeWidthRatio {
     return _progressIndicator.strokeWidthRatio;
 }
 
 
 #pragma mark - Image Display
 
--(void)loadImageFromURL:(NSURL*) url {
+-(void)loadImageFromURL:(NSURL*)url {
     [self loadImageFromURL:url forceRefreshingCache:NO];
 }
 
--(void)loadImageFromURL:(NSURL*) url forceRefreshingCache:(BOOL)force {
+-(void)loadImageFromURL:(NSURL*)url forceRefreshingCache:(BOOL)force {
     NSString *cacheDirectory = [self cacheDirectoryPath];
     NSString *cachedFilename = [[url absoluteString] md5];
     NSString *cachedFilePath = [cacheDirectory stringByAppendingPathComponent:cachedFilename];
     
     if(force || ![self fileExists:cachedFilePath]) {
-        _imageView.hidden = YES;
+        [self hideImage];
         _progressIndicator.value = 0;
         _progressIndicator.hidden = NO;
         
         [self downloadImageFromURL:url toFilePath:cachedFilePath progressIndicator:_progressIndicator callback:^(NSString *filePath) {
-            _imageView.image = [UIImage imageWithContentsOfFile:filePath];
             _progressIndicator.hidden = YES;
-            _imageView.hidden = NO;
+            
+            if(filePath != nil) {
+                UIImage *cachedImage = [UIImage imageWithContentsOfFile:filePath];
+                [self displayImage:cachedImage withContentMode:UIViewContentModeScaleAspectFill];
+            }
         }];
     } else {
-        _imageView.image = [UIImage imageWithContentsOfFile:cachedFilePath];
-        _imageView.hidden = NO;
+        UIImage *cachedImage = [UIImage imageWithContentsOfFile:cachedFilePath];
+        [self displayImage:cachedImage withContentMode:UIViewContentModeScaleAspectFill];
     }
 }
 
--(void)downloadImageFromURL:(NSURL*)url toFilePath:(NSString*)destinationPath progressIndicator:(MACircleProgressIndicator*)progressIndicator callback:(void(^)(NSString* filePath))callback {
+-(void)downloadImageFromURL:(NSURL*)url
+                 toFilePath:(NSString*)destinationPath
+          progressIndicator:(MACircleProgressIndicator*)progressIndicator
+                   callback:(void(^)(NSString* filePath))callback {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url];
         
@@ -161,6 +181,20 @@
     return [fileManager fileExistsAtPath:path isDirectory:NO];
 }
 
+-(void)hideImage {
+    _displayingImage = NO;
+    if(_placeholderImage) {
+        [self displayImage:_placeholderImage withContentMode:UIViewContentModeCenter];
+    } else {
+        _imageView.hidden = YES;
+    }
+}
+
+-(void)displayImage:(UIImage*)image withContentMode:(UIViewContentMode)contentMode {
+    _imageView.contentMode = contentMode;
+    _imageView.hidden = NO;
+    _imageView.image = image;
+}
 
 #pragma mark - Layout
     

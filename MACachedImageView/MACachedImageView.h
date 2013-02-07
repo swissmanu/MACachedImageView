@@ -5,9 +5,10 @@
 
 @interface MACachedImageView : UIView
 
+@property (nonatomic, retain) UIImage *placeholderImage UI_APPEARANCE_SELECTOR;
 @property (nonatomic, retain) UIColor *progressIndicatorColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic) CGFloat progressIndicatorStrokeWidth UI_APPEARANCE_SELECTOR;
-@property (nonatomic) CGFloat progressIndicatorStrokeWidhtRatio UI_APPEARANCE_SELECTOR;
+@property (nonatomic) CGFloat progressIndicatorStrokeWidthRatio UI_APPEARANCE_SELECTOR;
 
 
 -(void)loadImageFromURL:(NSURL*) url;
