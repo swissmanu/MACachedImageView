@@ -25,8 +25,12 @@
 
 
 /** Display an image from the given url. If the image was requested to display before and is avialable in the cache, it gets loaded from there. If not the image gets downloaded while showing a progress indicator. */
--(void)loadImageFromURL:(NSURL*)url;
+-(void)displayImageFromURL:(NSURL*)url;
 
 /** Display an image from the given url. If the image was requested to display before and is avialable in the cache, it gets loaded from there. If not the image gets downloaded while showing a progress indicator. You can bypass the caching mechanism by passing YES for the forceRefreshingCache parameter. The cache gets refreshed then without checking it before. */
--(void)loadImageFromURL:(NSURL*)url forceRefreshingCache:(BOOL)force;
+-(void)displayImageFromURL:(NSURL*)url forceRefreshingCache:(BOOL)force;
+
+/** Display any UIImage without using any caching mechanisms. Handy if you want to display some images from your resource bundle */
+-(void)displayImage:(UIImage*)image;
+
 @end

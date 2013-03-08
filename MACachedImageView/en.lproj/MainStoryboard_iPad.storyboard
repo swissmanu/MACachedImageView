@@ -48,6 +48,19 @@
                                     <action selector="onLoadForced:" destination="2" eventType="touchUpInside" id="bTi-nT-UkF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMi-KX-tDL">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="Load (Local)">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLoadLocal:" destination="2" eventType="touchUpInside" id="Xhc-YI-48g"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Show Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-5M-pcN">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="80j-f9-Tcg"/>
@@ -65,8 +78,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="iMi-KX-tDL" firstAttribute="top" secondItem="EBf-rV-wao" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0lo-pc-4as"/>
                             <constraint firstItem="ZLh-mk-Y1B" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="Q3o-4j-gSD"/>
-                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="top" secondItem="EBf-rV-wao" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="QeN-Sr-agx"/>
+                            <constraint firstItem="iMi-KX-tDL" firstAttribute="leading" secondItem="EBf-rV-wao" secondAttribute="leading" type="default" id="QSd-9J-x5a"/>
                             <constraint firstItem="jY3-5M-pcN" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="RhX-aq-t4b"/>
                             <constraint firstItem="wGu-q3-8dv" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="TzR-8w-bh0"/>
                             <constraint firstItem="wGu-q3-8dv" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" type="default" id="UY5-XI-9S5"/>
@@ -75,6 +89,8 @@
                             <constraint firstAttribute="trailing" secondItem="WcU-Uw-dsU" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YbT-pj-Xpr"/>
                             <constraint firstItem="VdK-oV-joJ" firstAttribute="centerY" secondItem="WcU-Uw-dsU" secondAttribute="centerY" type="default" id="Ze6-PS-jHP"/>
                             <constraint firstItem="EBf-rV-wao" firstAttribute="top" secondItem="WcU-Uw-dsU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="cjD-2h-7fM"/>
+                            <constraint firstAttribute="trailing" secondItem="iMi-KX-tDL" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="e8H-AM-JRi"/>
+                            <constraint firstItem="ZLh-mk-Y1B" firstAttribute="top" secondItem="iMi-KX-tDL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="eoQ-5v-QnO"/>
                             <constraint firstAttribute="trailing" secondItem="EBf-rV-wao" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hcY-Dq-kgE"/>
                             <constraint firstItem="WcU-Uw-dsU" firstAttribute="leading" secondItem="EBf-rV-wao" secondAttribute="leading" type="default" id="hhl-Ub-ZGW"/>
                             <constraint firstAttribute="trailing" secondItem="wGu-q3-8dv" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="j0K-Jv-ayE"/>
@@ -94,7 +110,7 @@
         </scene>
     </scenes>
     <classes>
-        <class className="MACachedImageView" superclassName="UIView">
+        <class className="MACachedImageView" superclassName="UIImageView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MACachedImageView.h"/>
         </class>
         <class className="MAViewController" superclassName="UIViewController">
@@ -102,6 +118,7 @@
             <relationships>
                 <relationship kind="action" name="onLoad:"/>
                 <relationship kind="action" name="onLoadForced:"/>
+                <relationship kind="action" name="onLoadLocal:"/>
                 <relationship kind="action" name="onTogglePlaceholder:"/>
                 <relationship kind="outlet" name="cachedImageView" candidateClass="MACachedImageView"/>
                 <relationship kind="outlet" name="txtURL" candidateClass="UITextField"/>

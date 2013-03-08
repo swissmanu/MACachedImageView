@@ -7,7 +7,6 @@
         <!--View Controller-->
         <scene sceneID="5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="MAViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
@@ -49,6 +48,19 @@
                                     <action selector="onLoadForced:" destination="2" eventType="touchUpInside" id="OQW-SN-p3M"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJe-9v-7iZ">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="Load (Local)">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLoadLocal:" destination="2" eventType="touchUpInside" id="SeY-MF-EWK"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Show Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7i-Xz-hHO">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="G1g-Dw-uTQ"/>
@@ -66,22 +78,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9b1-TH-dcp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="1Xg-c5-0s9"/>
+                            <constraint firstItem="jKr-kB-fKI" firstAttribute="top" secondItem="OJe-9v-7iZ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="2Wp-nt-dY8"/>
                             <constraint firstItem="r7i-Xz-hHO" firstAttribute="centerY" secondItem="mBv-an-HVH" secondAttribute="centerY" type="default" id="2bM-tu-nxi"/>
-                            <constraint firstItem="QJ8-gi-jP4" firstAttribute="trailing" secondItem="mBv-an-HVH" secondAttribute="trailing" type="default" id="5VT-ai-Ch5"/>
                             <constraint firstItem="QJ8-gi-jP4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="BZR-8o-6Ja"/>
                             <constraint firstItem="r7i-Xz-hHO" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Bk8-1I-isF"/>
                             <constraint firstAttribute="trailing" secondItem="iBJ-Wr-yKq" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Bkf-NW-Ck0"/>
                             <constraint firstItem="iBJ-Wr-yKq" firstAttribute="top" secondItem="mBv-an-HVH" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="EdD-fp-54G"/>
+                            <constraint firstAttribute="trailing" secondItem="QJ8-gi-jP4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ga2-Vg-W8a"/>
                             <constraint firstItem="9b1-TH-dcp" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="HZA-Je-OkC"/>
+                            <constraint firstItem="jKr-kB-fKI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="IkH-hb-7ke"/>
+                            <constraint firstAttribute="trailing" secondItem="OJe-9v-7iZ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Jg5-or-tqC"/>
+                            <constraint firstItem="OJe-9v-7iZ" firstAttribute="top" secondItem="QJ8-gi-jP4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="M9u-wO-mC4"/>
+                            <constraint firstAttribute="trailing" secondItem="mBv-an-HVH" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="N98-VB-qAn"/>
                             <constraint firstItem="QJ8-gi-jP4" firstAttribute="top" secondItem="iBJ-Wr-yKq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Rgz-be-IiA"/>
-                            <constraint firstItem="jKr-kB-fKI" firstAttribute="top" secondItem="QJ8-gi-jP4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="UDh-jY-0RB"/>
-                            <constraint firstItem="mBv-an-HVH" firstAttribute="trailing" secondItem="9b1-TH-dcp" secondAttribute="trailing" type="default" id="ZxZ-Px-AvY"/>
                             <constraint firstItem="r7i-Xz-hHO" firstAttribute="top" secondItem="9b1-TH-dcp" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="c8A-IT-fGI"/>
-                            <constraint firstItem="QJ8-gi-jP4" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="hXI-j3-ghb"/>
+                            <constraint firstItem="OJe-9v-7iZ" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="k9M-ht-1lZ"/>
                             <constraint firstItem="jKr-kB-fKI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="mps-YS-VU5"/>
                             <constraint firstItem="jKr-kB-fKI" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="roO-M7-k3W"/>
                             <constraint firstItem="9b1-TH-dcp" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xHf-N8-rel"/>
-                            <constraint firstItem="QJ8-gi-jP4" firstAttribute="centerX" secondItem="jKr-kB-fKI" secondAttribute="centerX" type="default" id="yPw-NT-eqN"/>
                         </constraints>
                     </view>
                     <connections>
@@ -89,28 +104,11 @@
                         <outlet property="txtURL" destination="9b1-TH-dcp" id="m6E-9X-7R0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="155" y="2"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MACachedImageView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MACachedImageView.h"/>
-        </class>
-        <class className="MAViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MAViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onLoad:"/>
-                <relationship kind="action" name="onLoadForced:"/>
-                <relationship kind="action" name="onTogglePlaceholder:"/>
-                <relationship kind="outlet" name="cachedImageView" candidateClass="MACachedImageView"/>
-                <relationship kind="outlet" name="txtURL" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

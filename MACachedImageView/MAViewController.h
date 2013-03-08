@@ -9,6 +9,7 @@
 
 - (IBAction)onLoad:(id)sender;
 - (IBAction)onLoadForced:(id)sender;
+- (IBAction)onLoadLocal:(id)sender;
 - (IBAction)onTogglePlaceholder:(id)sender;
 
 @end

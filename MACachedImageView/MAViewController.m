@@ -11,7 +11,7 @@
     NSString *rawURL = self.txtURL.text;
     if(rawURL.length > 0) {
         NSURL *url = [NSURL URLWithString:rawURL];
-        [self.cachedImageView loadImageFromURL:url];
+        [self.cachedImageView displayImageFromURL:url];
     }
 }
 
@@ -19,8 +19,14 @@
     NSString *rawURL = self.txtURL.text;
     if(rawURL.length > 0) {
         NSURL *url = [NSURL URLWithString:rawURL];
-        [self.cachedImageView loadImageFromURL:url forceRefreshingCache:YES];
+        [self.cachedImageView displayImageFromURL:url forceRefreshingCache:YES];
     }
+}
+
+- (IBAction)onLoadLocal:(id)sender {
+    // Image source: http://www.sailingchartersaltspring.com/index.php/sailing-courses/sailing_to_the_sunrise/
+    UIImage *localImage = [UIImage imageNamed:@"sailing.jpg"];
+    [self.cachedImageView displayImage:localImage];
 }
 
 - (IBAction)onTogglePlaceholder:(id)sender {

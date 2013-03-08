@@ -22,6 +22,7 @@
 		647F858016C394F800A2F02D /* MACachedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 646DDBA016BC62870093FA98 /* MACachedImageView.m */; };
 		647F858416C39CB100A2F02D /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 647F858216C39CB100A2F02D /* placeholder.png */; };
 		647F858516C39CB100A2F02D /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 647F858316C39CB100A2F02D /* placeholder@2x.png */; };
+		64841AB016E9E8150035C82E /* sailing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64841AAF16E9E8150035C82E /* sailing.jpg */; };
 		DF982007644F4816A576D6E9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24892E49518C4FECA2447124 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		646DDBA016BC62870093FA98 /* MACachedImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MACachedImageView.m; sourceTree = "<group>"; };
 		647F858216C39CB100A2F02D /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		647F858316C39CB100A2F02D /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		64841AAF16E9E8150035C82E /* sailing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sailing.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				646DDB9816BC623F0093FA98 /* MAViewController.m */,
 				647F858216C39CB100A2F02D /* placeholder.png */,
 				647F858316C39CB100A2F02D /* placeholder@2x.png */,
+				64841AAF16E9E8150035C82E /* sailing.jpg */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				646DDB9616BC623F0093FA98 /* MainStoryboard_iPad.storyboard in Resources */,
 				647F858416C39CB100A2F02D /* placeholder.png in Resources */,
 				647F858516C39CB100A2F02D /* placeholder@2x.png in Resources */,
+				64841AB016E9E8150035C82E /* sailing.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

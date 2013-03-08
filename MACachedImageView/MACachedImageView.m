@@ -146,11 +146,11 @@
 
 #pragma mark - Image Display
 
--(void)loadImageFromURL:(NSURL*)url {
-    [self loadImageFromURL:url forceRefreshingCache:NO];
+-(void)displayImageFromURL:(NSURL*)url {
+    [self displayImageFromURL:url forceRefreshingCache:NO];
 }
 
--(void)loadImageFromURL:(NSURL*)url forceRefreshingCache:(BOOL)force {
+-(void)displayImageFromURL:(NSURL*)url forceRefreshingCache:(BOOL)force {
     NSString *cacheDirectory = [self cacheDirectoryPath];
     NSString *cachedFilename = [[url absoluteString] md5];
     NSString *cachedFilePath = [cacheDirectory stringByAppendingPathComponent:cachedFilename];
@@ -172,6 +172,10 @@
         UIImage *cachedImage = [UIImage imageWithContentsOfFile:cachedFilePath];
         [self displayImage:cachedImage withContentMode:self.imageContentMode];
     }
+}
+
+-(void)displayImage:(UIImage *)image {
+    [self displayImage:image withContentMode:self.imageContentMode];
 }
 
 -(void)downloadImageFromURL:(NSURL*)url
