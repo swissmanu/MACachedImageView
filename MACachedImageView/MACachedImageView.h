@@ -3,7 +3,7 @@
 #import <AFNetworking.h>
 #import <MACircleProgressIndicator.h>
 
-@interface MACachedImageView : UIView
+@interface MACachedImageView : UIImageView
 
 /** If no image is loaded, this placeholder image gets displayed. */
 @property (nonatomic, retain) UIImage *placeholderImage UI_APPEARANCE_SELECTOR;

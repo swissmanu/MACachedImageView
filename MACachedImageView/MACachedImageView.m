@@ -1,15 +1,20 @@
 
 #import "MACachedImageView.h"
-#import "NSString+MD5.h"
+#import <CommonCrypto/CommonDigest.h>
 
 #define kCachedImageViewDefaultProgressIndicatorSize 35.0
 #define kSubfolderImageCache @"macachedimageview"
+
+#pragma mark - Private MD5 NSString extension
+
+@interface NSString (MD5)
+- (NSString *) md5;
+@end
 
 
 #pragma mark - Private Interface Extensions
 
 @interface MACachedImageView () {
-    UIImageView *_imageView;
     MACircleProgressIndicator *_progressIndicator;
     BOOL _displayingImage;
 }
@@ -73,7 +78,6 @@
 }
 
 -(void)setup {
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     _progressIndicator = [[MACircleProgressIndicator alloc] initWithFrame:CGRectZero];
     
     _progressIndicator.color = [UIColor whiteColor];
@@ -82,7 +86,6 @@
     self.imageContentMode = UIViewContentModeScaleAspectFill;
     self.placeholderContentMode = UIViewContentModeCenter;
     
-    [self addSubview:_imageView];
     [self addSubview:_progressIndicator];
     
     [self hideImage];
@@ -128,7 +131,7 @@
     _imageContentMode = imageContentMode;
     
     if(_displayingImage) {
-        _imageView.contentMode = imageContentMode;
+        self.contentMode = imageContentMode;
     }
 }
 
@@ -136,7 +139,7 @@
     _placeholderContentMode = placeholderContentMode;
     
     if(!_displayingImage && _placeholderImage != nil) {
-        _imageView.contentMode = placeholderContentMode;
+        self.contentMode = placeholderContentMode;
     }
 }
 
@@ -220,16 +223,15 @@
     if(_placeholderImage) {
         [self displayImage:_placeholderImage withContentMode:self.placeholderContentMode];
     } else {
-        _imageView.hidden = YES;
+        self.image = nil;
     }
     _displayingImage = NO;
 }
 
 -(void)displayImage:(UIImage*)image withContentMode:(UIViewContentMode)contentMode {
     _displayingImage = YES;
-    _imageView.contentMode = contentMode;
-    _imageView.hidden = NO;
-    _imageView.image = image;
+    self.contentMode = contentMode;
+    self.image = image;
 }
 
 #pragma mark - Layout
@@ -237,13 +239,33 @@
 -(void)layoutSubviews {
     CGRect frame = self.frame;
     
-    _imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     _progressIndicator.frame = CGRectMake(
         (frame.size.width-kCachedImageViewDefaultProgressIndicatorSize)/2,
         (frame.size.height-kCachedImageViewDefaultProgressIndicatorSize)/2,
         kCachedImageViewDefaultProgressIndicatorSize,
         kCachedImageViewDefaultProgressIndicatorSize
     );
+}
+
+@end
+
+
+#pragma mark - MD5 NSString Extension Implementation
+
+@implementation NSString (MD5)
+
+- (NSString *) md5 {
+    const char *cStr = [self UTF8String];
+    unsigned char result[16];
+    CC_MD5( cStr, strlen(cStr), result );
+    
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
 }
 
 @end

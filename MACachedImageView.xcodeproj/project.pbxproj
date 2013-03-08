@@ -20,7 +20,6 @@
 		646DDB9616BC623F0093FA98 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646DDB9416BC623F0093FA98 /* MainStoryboard_iPad.storyboard */; };
 		646DDB9916BC623F0093FA98 /* MAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646DDB9816BC623F0093FA98 /* MAViewController.m */; };
 		647F858016C394F800A2F02D /* MACachedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 646DDBA016BC62870093FA98 /* MACachedImageView.m */; };
-		647F858116C394F800A2F02D /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 646DDBA216BC62870093FA98 /* NSString+MD5.m */; };
 		647F858416C39CB100A2F02D /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 647F858216C39CB100A2F02D /* placeholder.png */; };
 		647F858516C39CB100A2F02D /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 647F858316C39CB100A2F02D /* placeholder@2x.png */; };
 		DF982007644F4816A576D6E9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24892E49518C4FECA2447124 /* libPods.a */; };
@@ -48,8 +47,6 @@
 		646DDB9816BC623F0093FA98 /* MAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAViewController.m; sourceTree = "<group>"; };
 		646DDB9F16BC62870093FA98 /* MACachedImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MACachedImageView.h; sourceTree = "<group>"; };
 		646DDBA016BC62870093FA98 /* MACachedImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MACachedImageView.m; sourceTree = "<group>"; };
-		646DDBA116BC62870093FA98 /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		646DDBA216BC62870093FA98 /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		647F858216C39CB100A2F02D /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		647F858316C39CB100A2F02D /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,8 +100,6 @@
 			children = (
 				646DDB9F16BC62870093FA98 /* MACachedImageView.h */,
 				646DDBA016BC62870093FA98 /* MACachedImageView.m */,
-				646DDBA116BC62870093FA98 /* NSString+MD5.h */,
-				646DDBA216BC62870093FA98 /* NSString+MD5.m */,
 				646DDBA316BC62910093FA98 /* Demo */,
 				646DDB8016BC623F0093FA98 /* Supporting Files */,
 			);
@@ -229,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				647F858016C394F800A2F02D /* MACachedImageView.m in Sources */,
-				647F858116C394F800A2F02D /* NSString+MD5.m in Sources */,
 				646DDB8616BC623F0093FA98 /* main.m in Sources */,
 				646DDB8A16BC623F0093FA98 /* MAAppDelegate.m in Sources */,
 				646DDB9916BC623F0093FA98 /* MAViewController.m in Sources */,
