@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-#import <AFNetworking.h>
+#import <AFHTTPRequestOperation.h>
 #import <MACircleProgressIndicator.h>
 
 @interface MACachedImageView : UIImageView
