@@ -8,7 +8,7 @@
 ### CocoaPods
 The easiest way to install `MACachedImageView` is using [CocoaPods](http://cocoapods.org/). Add the following dependency to your `Podfile` and run the `pod install` command via command line:
 
-	pod 'MACachedImageView', '~> 1.1.0'
+	pod 'MACachedImageView', '~> 1.1.2'
 
 ### Manual
 If you'd like to install without CocoaPods, clone this repository and copy the following files from the `MACachedImageView/` subfolder into your project:
