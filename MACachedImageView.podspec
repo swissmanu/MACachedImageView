@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '6.0'
   s.source_files = 'MACachedImageView/MACachedImageView.{h,m}','MACachedImageView/NSString+MD5.{h,m}'
-  s.dependency     'AFNetworking', '~> 2.2.0'
+  s.dependency     'AFNetworking', '~> 2.0'
   s.dependency     'MACircleProgressIndicator', '~> 1.0.0'
   s.requires_arc = true
 end
