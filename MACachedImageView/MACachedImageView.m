@@ -187,7 +187,7 @@
         
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:req];
         operation.outputStream = [NSOutputStream outputStreamToFileAtPath:destinationPath append:NO];
-        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
             float progress = (float)totalBytesRead / (float)totalBytesExpectedToRead;
             if(progressIndicator) progressIndicator.value = progress;
         }];
